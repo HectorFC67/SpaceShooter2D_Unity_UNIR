@@ -13,7 +13,17 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
+            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
+
+            if (enemy != null)
+            {
+                enemy.Kill();
+            }
+            else
+            {
+                Destroy(other.gameObject); // Destroy por si no tiene el script EnemyMovement (seguridad)
+            }
+
             Destroy(gameObject);
         }
     }

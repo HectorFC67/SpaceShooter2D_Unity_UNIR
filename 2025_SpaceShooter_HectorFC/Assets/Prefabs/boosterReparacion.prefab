@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5462151085210241215
+--- !u!1 &7128021221605525101
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1126841530124123536}
-  - component: {fileID: 7021805042938947482}
-  - component: {fileID: 188865836345422080}
-  - component: {fileID: -6801441784624278671}
-  - component: {fileID: 4734147312849961052}
+  - component: {fileID: 3186469362852998455}
+  - component: {fileID: 62844474507753455}
+  - component: {fileID: -5462993744734359217}
+  - component: {fileID: 6341569943809593433}
   m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Enemy
+  m_Name: boosterReparacion
+  m_TagString: BoosterReparacion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1126841530124123536
+--- !u!4 &3186469362852998455
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462151085210241215}
+  m_GameObject: {fileID: 7128021221605525101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5060749, y: 0.5405071, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.607, y: -0.055, z: 0}
+  m_LocalScale: {x: 0.075, y: 0.075, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7021805042938947482
+--- !u!212 &62844474507753455
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462151085210241215}
+  m_GameObject: {fileID: 7128021221605525101}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -81,45 +80,25 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
-  m_Sprite: {fileID: -3086720242725003937, guid: 7a8d42864088fc8448986d3a447ab977, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 2133355286485755655, guid: b81db97871bac2243b4c0473c3652fbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.18}
+  m_Size: {x: 2.4, y: 2.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &188865836345422080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462151085210241215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 850c3ab46ae391d4abecd96a83233187, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  speed: 2
-  boosterPrefabs:
-  - {fileID: 2399751474065002569, guid: c28c71bd9560d7a4fb428d7014b9dbca, type: 3}
-  - {fileID: 7128021221605525101, guid: 130471dc954954247bcd0b278c22b214, type: 3}
-  - {fileID: 8677831001085007804, guid: 9ce49cb15f9905049ba1b6ffc71d7dc5, type: 3}
-  - {fileID: 3323427976174559213, guid: 9739c4c2b8367354a831ec8e3dffb2aa, type: 3}
-  - {fileID: 4468857321160666693, guid: 7bd1d56e05c6e654b89d3e74adb45107, type: 3}
-  dropChance: 0.3
---- !u!61 &-6801441784624278671
+--- !u!61 &-5462993744734359217
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462151085210241215}
+  m_GameObject: {fileID: 7128021221605525101}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -151,38 +130,24 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.18}
-    newSize: {x: 0.2, y: 0.18}
+    oldSize: {x: 2.4, y: 2.38}
+    newSize: {x: 2.4, y: 2.38}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.2, y: 0.18}
+  m_Size: {x: 2.4, y: 2.38}
   m_EdgeRadius: 0
---- !u!50 &4734147312849961052
-Rigidbody2D:
-  serializedVersion: 5
+--- !u!114 &6341569943809593433
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462151085210241215}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_GameObject: {fileID: 7128021221605525101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d904528c428ab374bbe1f86b02a88d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoosterMovement
+  speed: 1

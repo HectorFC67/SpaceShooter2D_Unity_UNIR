@@ -844,14 +844,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4685381720086767146, guid: aef86de7256ce9a4194051765273c2ad, type: 3}
-      propertyPath: maxSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685381720086767146, guid: aef86de7256ce9a4194051765273c2ad, type: 3}
-      propertyPath: acceleration
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4690130909098479225, guid: aef86de7256ce9a4194051765273c2ad, type: 3}
       propertyPath: m_Name
       value: PlayerSpaceShip

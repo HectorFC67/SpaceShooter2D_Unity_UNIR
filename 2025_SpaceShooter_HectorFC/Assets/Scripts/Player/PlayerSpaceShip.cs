@@ -2,20 +2,44 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerPowerUps))]
 public class PlayerSpaceShip : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] float maxSpeed = 1f;
     [SerializeField] float acceleration = 2f;
+    public float MaxSpeed           // propiedad para que los boosters puedan modificar la velocidad
+    {
+        get => maxSpeed;
+        set => maxSpeed = value;
+    }
 
+    [Header("Shooting")]
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
     [SerializeField] float bulletSpeed = 4f;
 
+    [SerializeField] float baseFireCooldown = 0.4f;
+    [SerializeField] float machineGunFireCooldown = 0.1f;
+
+    [Header("Lives")]
     [SerializeField] int maxLives = 3;
     int currentLives;
 
+    [Header("Input")]
     [SerializeField] InputActionReference move;
     [SerializeField] InputActionReference shoot;
+
+    // Internos movimiento
+    Vector2 rawMove;
+    Vector2 currentVelocity = Vector2.zero;
+    const float rawMoveThresholdForBakings = 0.1f;
+
+    // Disparo
+    float shootCooldownTimer = 0f;
+
+    // Referencia a boosters
+    PlayerPowerUps powerUps;
 
     private void OnEnable()
     {
@@ -29,27 +53,32 @@ public class PlayerSpaceShip : MonoBehaviour
         shoot.action.started += OnShoot;
     }
 
-    void Awake()
+    private void Awake()
     {
         currentLives = maxLives;
         Debug.Log("Vidas iniciales: " + currentLives);
+
+        powerUps = GetComponent<PlayerPowerUps>();
+        powerUps.Initialize(this);
     }
 
-    Vector2 rawMove;
-    Vector2 currentVelocity = Vector2.zero;
-    const float rawMoveThresholdForBakings = 0.1f;
-    void Update()
+    private void Update()
     {
+        float dt = Time.deltaTime;
+
+        // cooldown disparo
+        shootCooldownTimer -= dt;
+
+        // Movimiento
         if (rawMove.magnitude < rawMoveThresholdForBakings)
         {
-            currentVelocity *= 0.5f * Time.deltaTime;
+            currentVelocity *= 0.5f * dt;
         }
-        currentVelocity += rawMove * acceleration * Time.deltaTime;
 
-        float linearVelocity = currentVelocity.magnitude;
+        currentVelocity += rawMove * acceleration * dt;
         currentVelocity = Vector2.ClampMagnitude(currentVelocity, maxSpeed);
 
-        transform.Translate(currentVelocity * maxSpeed * Time.deltaTime);
+        transform.Translate(currentVelocity * dt);
     }
 
     private void OnDisable()
@@ -73,19 +102,37 @@ public class PlayerSpaceShip : MonoBehaviour
 
     private void OnShoot(InputAction.CallbackContext obj)
     {
+        if (powerUps == null) return;
+
+        float currentCooldown = powerUps.IsMachineGunActive
+            ? machineGunFireCooldown
+            : baseFireCooldown;
+
+        if (shootCooldownTimer > 0f)
+            return;
+
+        shootCooldownTimer = currentCooldown;
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
             rb.linearVelocity = Vector2.right * bulletSpeed;
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Colisión con enemigo
         if (other.CompareTag("Enemy"))
         {
+            if (powerUps != null && powerUps.IsInvincible)
+            {
+                Destroy(other.gameObject);
+                Debug.Log("Golpe bloqueado por escudo (invencible)");
+                return;
+            }
+
             currentLives--;
             Destroy(other.gameObject);
 
@@ -95,6 +142,37 @@ public class PlayerSpaceShip : MonoBehaviour
             {
                 Die();
             }
+
+            return;
+        }
+
+        // Boosters por tag
+        if (powerUps == null) return;
+
+        if (other.CompareTag("BoosterInvencibilidad"))
+        {
+            powerUps.ActivateInvincibility();
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("BoosterMetralleta"))
+        {
+            powerUps.ActivateMachineGun();
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("BoosterReparacion"))
+        {
+            powerUps.RepairOneLife(ref currentLives, maxLives);
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("BoosterVelocidad"))
+        {
+            powerUps.ActivateSpeedBoost();
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("BoosterNuclear"))
+        {
+            powerUps.ActivateNuclearBomb();
+            Destroy(other.gameObject);
         }
     }
 
@@ -103,5 +181,4 @@ public class PlayerSpaceShip : MonoBehaviour
         Debug.Log("Game Over");
         gameObject.SetActive(false);
     }
-
 }
