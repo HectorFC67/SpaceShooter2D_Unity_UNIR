@@ -24,7 +24,7 @@ public class PlayerSpaceShip : MonoBehaviour
 
     [Header("Lives")]
     [SerializeField] int maxLives = 3;
-    int currentLives;
+    public int MaxLives => maxLives;
 
     [Header("Input")]
     [SerializeField] InputActionReference move;
@@ -55,9 +55,6 @@ public class PlayerSpaceShip : MonoBehaviour
 
     private void Awake()
     {
-        currentLives = maxLives;
-        Debug.Log("Vidas iniciales: " + currentLives);
-
         powerUps = GetComponent<PlayerPowerUps>();
         powerUps.Initialize(this);
     }
@@ -133,16 +130,9 @@ public class PlayerSpaceShip : MonoBehaviour
                 return;
             }
 
-            currentLives--;
             Destroy(other.gameObject);
 
-            Debug.Log("Vidas restantes: " + currentLives);
-
-            if (currentLives <= 0)
-            {
-                Die();
-            }
-
+            GameManager.Instance?.OnPlayerHit();
             return;
         }
 
@@ -161,7 +151,7 @@ public class PlayerSpaceShip : MonoBehaviour
         }
         else if (other.CompareTag("BoosterReparacion"))
         {
-            powerUps.RepairOneLife(ref currentLives, maxLives);
+            powerUps.RepairOneLife();
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("BoosterVelocidad"))
@@ -176,9 +166,9 @@ public class PlayerSpaceShip : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
-        Debug.Log("Game Over");
+        Debug.Log("Game Over - Player desactivado");
         gameObject.SetActive(false);
     }
 }

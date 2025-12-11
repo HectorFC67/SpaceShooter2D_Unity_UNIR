@@ -74,17 +74,9 @@ public class PlayerPowerUps : MonoBehaviour
         Debug.Log($"Booster metralleta activado durante {machineGunDuration}s");
     }
 
-    public void RepairOneLife(ref int currentLives, int maxLives)
+    public void RepairOneLife()
     {
-        if (currentLives < maxLives)
-        {
-            currentLives++;
-            Debug.Log($"Booster reparación: vida recuperada. Vidas actuales: {currentLives}");
-        }
-        else
-        {
-            Debug.Log("Booster reparación: ya tienes las vidas máximas.");
-        }
+        GameManager.Instance?.RepairOneLife();
     }
 
     public void ActivateSpeedBoost()

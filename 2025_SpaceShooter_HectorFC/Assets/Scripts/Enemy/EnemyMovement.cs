@@ -34,6 +34,7 @@ public class EnemyMovement : MonoBehaviour
     public void Kill()
     {
         TrySpawnBooster();
+        GameManager.Instance?.OnEnemyKilled();
         Destroy(gameObject);
     }
 
