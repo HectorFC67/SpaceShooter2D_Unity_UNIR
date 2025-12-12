@@ -98,7 +98,7 @@ public class PlayerPowerUps : MonoBehaviour
         {
             if (enemy != null)
             {
-                Destroy(enemy.gameObject);
+                enemy.Kill(false);
             }
         }
     }

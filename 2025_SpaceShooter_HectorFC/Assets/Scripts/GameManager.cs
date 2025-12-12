@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int scoreKill = 25;
 
     int score = 0;
+    public int CurrentScore => score;
     float scoreTimeAccumulator = 0f;
 
     [Header("Lives")]
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
+
+        MusicManager.Instance?.PlayGameMusic();
     }
 
     private void Update()
@@ -145,19 +148,45 @@ public class GameManager : MonoBehaviour
                 if (spawner != null) spawner.enabled = false;
 
             }
-
-            if (player != null)
-            {
-                player.Die();
-            }
-
-            if (gameOverPanel != null)
-            {
-                gameOverPanel.SetActive(true);
-            }
-
-            Debug.Log("GAME OVER");
         }
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        string[] boosterTags =
+        {
+            "BoosterInvencibilidad",
+            "BoosterMetralleta",
+            "BoosterReparacion",
+            "BoosterVelocidad",
+            "BoosterNuclear"
+        };
+
+        foreach (string tag in boosterTags)
+        {
+            GameObject[] boosters = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject booster in boosters)
+            {
+                Destroy(booster);
+            }
+        }
+
+        if (player != null)
+        {
+                player.Die();
+        }
+
+        MusicManager.Instance?.PlayGameOverMusic();
+
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+
+        Debug.Log("GAME OVER");
     }
 }
 

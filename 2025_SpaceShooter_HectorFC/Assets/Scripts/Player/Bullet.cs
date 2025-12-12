@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                Destroy(other.gameObject); // Destroy por si no tiene el script EnemyMovement (seguridad)
+                Destroy(other.gameObject); // Destroy por si no tiene el script EnemyMovement
             }
 
             Destroy(gameObject);

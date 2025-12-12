@@ -31,9 +31,13 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void Kill()
+    public void Kill(bool dropBooster = true)
     {
-        TrySpawnBooster();
+        if (dropBooster)
+        {
+            TrySpawnBooster();
+        }
+
         GameManager.Instance?.OnEnemyKilled();
         Destroy(gameObject);
     }
