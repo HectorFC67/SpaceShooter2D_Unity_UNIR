@@ -150,6 +150,7 @@ MonoBehaviour:
   maxLives: 3
   move: {fileID: 5609507509423538675, guid: 43c5b375d89745044b5fb7f524c2b78c, type: 3}
   shoot: {fileID: -1087655763149748892, guid: 43c5b375d89745044b5fb7f524c2b78c, type: 3}
+  explosionPrefab: {fileID: 1828176872806910, guid: 89bac8ad18d9e5b4298cdfbd5ceb784b, type: 3}
 --- !u!114 &8583651073158182323
 MonoBehaviour:
   m_ObjectHideFlags: 0

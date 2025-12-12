@@ -30,6 +30,8 @@ public class PlayerSpaceShip : MonoBehaviour
     [SerializeField] InputActionReference move;
     [SerializeField] InputActionReference shoot;
 
+    [SerializeField] GameObject explosionPrefab;
+
     // Internos movimiento
     Vector2 rawMove;
     Vector2 currentVelocity = Vector2.zero;
@@ -110,6 +112,8 @@ public class PlayerSpaceShip : MonoBehaviour
 
         shootCooldownTimer = currentCooldown;
 
+        SFXManager.Instance?.PlayAllyShoot();
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -125,13 +129,14 @@ public class PlayerSpaceShip : MonoBehaviour
         {
             if (powerUps != null && powerUps.IsInvincible)
             {
+                SFXManager.Instance?.PlayShieldHit();
                 Destroy(other.gameObject);
                 Debug.Log("Golpe bloqueado por escudo (invencible)");
                 return;
             }
 
             Destroy(other.gameObject);
-
+            SFXManager.Instance?.PlayHit();
             GameManager.Instance?.OnPlayerHit();
             return;
         }
@@ -141,26 +146,31 @@ public class PlayerSpaceShip : MonoBehaviour
 
         if (other.CompareTag("BoosterInvencibilidad"))
         {
+            SFXManager.Instance?.PlayPowerUpPickup();
             powerUps.ActivateInvincibility();
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("BoosterMetralleta"))
         {
+            SFXManager.Instance?.PlayPowerUpPickup();
             powerUps.ActivateMachineGun();
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("BoosterReparacion"))
         {
+            SFXManager.Instance?.PlayPowerUpPickup();
             powerUps.RepairOneLife();
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("BoosterVelocidad"))
         {
+            SFXManager.Instance?.PlayPowerUpPickup();
             powerUps.ActivateSpeedBoost();
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("BoosterNuclear"))
         {
+            SFXManager.Instance?.PlayPowerUpPickup();
             powerUps.ActivateNuclearBomb();
             Destroy(other.gameObject);
         }
@@ -168,6 +178,9 @@ public class PlayerSpaceShip : MonoBehaviour
 
     public void Die()
     {
+        if (explosionPrefab != null)
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
         Debug.Log("Game Over - Player desactivado");
         gameObject.SetActive(false);
     }

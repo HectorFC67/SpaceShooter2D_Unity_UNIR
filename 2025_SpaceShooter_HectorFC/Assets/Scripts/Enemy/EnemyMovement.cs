@@ -8,7 +8,10 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Booster Drop")]
     [SerializeField] GameObject[] boosterPrefabs;
-    [SerializeField, Range(0f, 1f)] float dropChance = 0.3f; 
+    [SerializeField, Range(0f, 1f)] float dropChance = 0.3f;
+
+    [Header("VFX")]
+    [SerializeField] GameObject explosionPrefab;
 
     void Update()
     {
@@ -17,10 +20,7 @@ public class EnemyMovement : MonoBehaviour
         Camera cam = Camera.main;
         float xLeft = cam.ViewportToWorldPoint(new Vector3(-0.2f, 0f, 0f)).x;
 
-        if (transform.position.x < xLeft)
-        {
-            Destroy(gameObject);
-        }
+        if (transform.position.x < xLeft) Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,6 +33,10 @@ public class EnemyMovement : MonoBehaviour
 
     public void Kill(bool dropBooster = true)
     {
+        if (explosionPrefab != null)
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        SFXManager.Instance?.PlayEnemyExplode();
         if (dropBooster)
         {
             TrySpawnBooster();

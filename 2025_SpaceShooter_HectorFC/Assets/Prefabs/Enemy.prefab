@@ -113,6 +113,7 @@ MonoBehaviour:
   - {fileID: 3323427976174559213, guid: 9739c4c2b8367354a831ec8e3dffb2aa, type: 3}
   - {fileID: 4468857321160666693, guid: 7bd1d56e05c6e654b89d3e74adb45107, type: 3}
   dropChance: 0.3
+  explosionPrefab: {fileID: 1828176872806910, guid: 89bac8ad18d9e5b4298cdfbd5ceb784b, type: 3}
 --- !u!61 &-6801441784624278671
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850c3ab46ae391d4abecd96a83233187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  speed: 0.5
+  speed: 0.75
   boosterPrefabs:
   - {fileID: 2399751474065002569, guid: c28c71bd9560d7a4fb428d7014b9dbca, type: 3}
   - {fileID: 7128021221605525101, guid: 130471dc954954247bcd0b278c22b214, type: 3}
@@ -115,6 +115,7 @@ MonoBehaviour:
   - {fileID: 3323427976174559213, guid: 9739c4c2b8367354a831ec8e3dffb2aa, type: 3}
   - {fileID: 4468857321160666693, guid: 7bd1d56e05c6e654b89d3e74adb45107, type: 3}
   dropChance: 0.3
+  explosionPrefab: {fileID: 1828176872806910, guid: 89bac8ad18d9e5b4298cdfbd5ceb784b, type: 3}
 --- !u!61 &-6801441784624278671
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -203,8 +204,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7016980579352361112, guid: 6213d9199aa8ae04bb2b8d011ca00da3, type: 3}
   firePoint: {fileID: 986232466396656803}
   bulletSpeed: 3
-  minShootTime: 1.5
-  maxShootTime: 3.5
+  minShootTime: 1.25
+  maxShootTime: 2.75
 --- !u!1 &7200141725117592213
 GameObject:
   m_ObjectHideFlags: 0

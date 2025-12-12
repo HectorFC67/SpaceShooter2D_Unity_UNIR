@@ -37,6 +37,8 @@ public class EnemyShooter : MonoBehaviour
     {
         if (bulletPrefab == null || firePoint == null) return;
 
+        SFXManager.Instance?.PlayEnemyShoot();
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
